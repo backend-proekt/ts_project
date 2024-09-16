@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne } from 'typeorm';
 import { UserEntity } from './user.entity';
+import { DirectionEntity } from './direction.entity';
 import { IsNotEmpty } from 'class-validator';
 import { TaskEntity } from './task.entity';
+import { StudentEntity } from './student.entity';
 
 @Entity()
 export class GroupEntity {
@@ -18,4 +20,10 @@ export class GroupEntity {
 
   @OneToMany(() => TaskEntity, (task) => task.group)
   tasks: TaskEntity[];
+
+  @ManyToOne(() => DirectionEntity, (direction) => direction.groups)
+  direction: DirectionEntity[];
+
+  @OneToMany(() => StudentEntity, (student) => student.group)
+  students: StudentEntity[];
 }
