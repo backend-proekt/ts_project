@@ -1,9 +1,18 @@
-import { Controller, Get, Inject, Param, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Post, Req, Res, UseGuards, Body } from '@nestjs/common';
 import { IApplicationService } from 'src/use-cases/application/interface/service/application.service.interface';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { 
+  ApiBearerAuth,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBody,
+  ApiConsumes,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { Response } from 'express';
-//import { ApplicationId } from 'src/infrastructure/decorators/application-id.decorator';
+import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
+
 
 @Controller('application')
 @ApiTags('Application')
@@ -15,19 +24,37 @@ export class ApplicationController {
     private readonly applicationService: IApplicationService,
   ) {}
 
-  /*@Get('getApplication')
-  async findById(@ApplicationId() id: string) {
-    const application = await this.applicationService.findById(id);
+  @Post('create')
+  @ApiOperation({ summary: 'Create a new application' })
+  @ApiConsumes('application/json')
+  @ApiBody({
+    schema: {
+      properties: {
+        id: { type: 'string', default: 'fdbskjfbdf' },
+        fio: { type: 'string', default: 'fdbskjfbdf' },
+        date: { type: 'string', default: 'fdbskjfbdf' },
+        parents_fio: { type: 'string', default: '' },
+        phone_number: { type: 'string', default: 'fdbskjfbdf' },
+        email: { type: 'string', default: 'fdbskjfbdf' },
+        status: { type: 'string', default: 'новый' },
+      },
+    },
+  })
+  @ApiResponse({ status: 201, description: 'The application has been successfully created.' })
+  @ApiResponse({ status: 400, description: 'Bad Request.' })
+  async createApplication(@Body() data: ICreateApplicationDto) {
+    return await this.applicationService.createApplication(data);
+  }
 
-    return {
-      id: application.id,
-      fio: application.fio,
-      date: application.date,
-      parents_fio: application.parents_fio,
-      phone_number: application.phone_number,
-      email: application.email,
-    };
-  }*/
+  @Get(':applicationId')
+  @ApiOperation({ summary: 'Get the application' })
+  @ApiResponse({ status: 200, description: 'Return the application' })
+  @ApiResponse({ status: 404, description: 'Application not found' })
+  @ApiParam({
+    name: 'applicationId',
+    description: 'ID of the application to retrieve',
+    type: String,
+  })
 
   @Get('findApplication/:email')
   async findByEmail(@Param('email') email: string) {
@@ -57,19 +84,19 @@ export class ApplicationController {
     };
   }
 
-  @Post(':applicationId/groups/:groupId')
-  async addApplicationToGroup(
-    @Param('applicationId') applicationId: string,
-    @Param('groupId') groupId: string,
-  ): Promise<void> {
-    await this.applicationService.addApplicationToGroup(applicationId, groupId);
-  }
-
   @Post(':applicationId/directions/:directionId')
   async addApplicationToDirection(
     @Param('applicationId') applicationId: string,
     @Param('directionId') directionId: string,
   ): Promise<void> {
     await this.applicationService.addApplicationToDirection(applicationId, directionId);
+  }
+
+  @Post(':applicationId/groups/:groupId')
+  async addApplicationToGroup(
+    @Param('applicationId') applicationId: string,
+    @Param('groupId') groupId: string,
+  ): Promise<void> {
+    await this.applicationService.addApplicationToGroup(applicationId, groupId);
   }
 }

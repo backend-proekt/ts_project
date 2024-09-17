@@ -6,4 +6,3 @@ export type TStudentEntity = {
   phone_number: string;
   email: string;
 };
-  

@@ -10,7 +10,6 @@ export class StudentEntity implements IStudentEntity {
   parents_fio: string
   phone_number: string;
   email: string;
-  status: string;
   direction: IDirectionEntity[];
   group: IGroupEntity[];
 
