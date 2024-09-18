@@ -11,7 +11,7 @@ import { GroupEntity } from '../db/entities/group.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentEntity, GroupEntity, DirectionEntity])],
+  imports: [TypeOrmModule.forFeature([StudentEntity, DirectionEntity, GroupEntity])],
   controllers: [StudentController],
   providers: [
     {
@@ -27,9 +27,9 @@ import { GroupEntity } from '../db/entities/group.entity';
         useClass: DirectionRepository,
     },
     {
-      provide: 'groupRepository',
-      useClass: GroupRepository,
-    }
+        provide: 'groupRepository',
+        useClass: GroupRepository,
+    },
   ],
 })
 export class StudentModule {}

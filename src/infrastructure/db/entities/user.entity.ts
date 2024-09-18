@@ -2,12 +2,10 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import {
   Column,
   Entity,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TaskEntity } from './task.entity';
-import { GroupEntity } from './group.entity';
 
 @Entity()
 export class UserEntity {
@@ -30,7 +28,4 @@ export class UserEntity {
 
   @OneToMany(() => TaskEntity, (task) => task.user)
   tasks: TaskEntity[];
-
-  @ManyToMany(() => GroupEntity, (group) => group.users)
-  groups: GroupEntity[];
 }

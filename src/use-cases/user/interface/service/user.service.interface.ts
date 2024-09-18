@@ -5,5 +5,4 @@ export interface IUserService {
   createUser(data: ICreateUserDto): Promise<IUserEntity>;
   findByEmail(email: string): Promise<IUserEntity>;
   findById(id: string): Promise<IUserEntity>;
-  addUserToGroup(userId: string, groupId: string): Promise<void>;
 }

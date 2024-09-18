@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { GroupEntity } from './group.entity';
 
 @Entity()
 export class TaskEntity {
@@ -34,7 +33,4 @@ export class TaskEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.tasks)
   user: UserEntity;
-
-  @ManyToOne(() => GroupEntity, (group) => group.tasks)
-  group: GroupEntity;
 }

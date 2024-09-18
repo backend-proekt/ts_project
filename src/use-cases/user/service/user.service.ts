@@ -5,15 +5,12 @@ import { IUserRepository } from '../interface/repository/user.repository.interfa
 import { IUserEntity } from 'src/entiies/user/interface/user.entity.interface';
 import { ICreateUserDto } from '../interface/dto/create.user.dto.interface';
 import * as bcrypt from 'bcrypt';
-import { IGroupRepository } from 'src/use-cases/group/interface/repository/group.repository.interface';
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
     @Inject('userRepository')
     private readonly userRepository: IUserRepository,
-    @Inject('groupRepository')
-    private readonly groupRepository: IGroupRepository,
   ) {}
 
   async createUser(data: ICreateUserDto): Promise<IUserEntity> {
@@ -32,17 +29,5 @@ export class UserService implements IUserService {
 
   async findByEmail(email: string): Promise<IUserEntity> {
     return await this.userRepository.findByEmail(email);
-  }
-
-  async addUserToGroup(userId: string, groupId: string): Promise<void> {
-    const user = await this.userRepository.findOne(userId);
-    const group = await this.groupRepository.findOne(groupId);
-
-    if (!user || !group) {
-      throw new Error('User or Group not found');
-    }
-
-    user.groups.push(group);
-    await this.userRepository.addUserToGroup(user);
   }
 }

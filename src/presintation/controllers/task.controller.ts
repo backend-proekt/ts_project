@@ -45,29 +45,6 @@ export class TaskController {
     return await this.taskService.createTask(data, id);
   }
 
-  @Post('createForGroup')
-  @ApiOperation({ summary: 'Create a new task for a group' })
-  @ApiConsumes('application/json')
-  @ApiBody({
-    schema: {
-      properties: {
-        userId: { type: 'string' },
-        groupId: { type: 'string' },
-        title: { type: 'string' },
-        description: { type: 'string' },
-        stage: { type: 'string' },
-        createdAt: { type: 'date', default: "" },
-        endDate: { type: 'date', default: "" },
-      },
-    },
-  })
-  @ApiResponse({ status: 201, description: 'The task has been successfully created for the group.' })
-  @ApiResponse({ status: 400, description: 'Bad Request.' })
-  async createTaskForGroup(@Body() createTaskDto: { userId: string; groupId: string; title: string; description: string; stage: string, createdAt: string | null, endDate: string | null }) {
-    const { userId, groupId, title, description, stage, createdAt, endDate } = createTaskDto;
-    return this.taskService.createTaskForGroup(userId, groupId, title, description, stage, createdAt, endDate);
-  }
-
   @Get('get')
   @ApiOperation({ summary: 'Get all tasks for the current user' })
   @ApiResponse({ status: 200, description: 'Return all tasks for the user.' })

@@ -6,5 +6,5 @@ export type TApplicationEntity = {
   phone_number: string;
   email: string;
   status: string;
-  };
+};
   

@@ -20,11 +20,14 @@ export class StudentService implements IStudentService {
   async createStudent(data: ICreateStudentDto): Promise<IStudentEntity> {
 
     return this.studentRepository.createStudent({
+      id: data.id,
       fio: data.fio,
       date: data.date,
       parents_fio: data.parents_fio,
       phone_number: data.phone_number,
       email: data.email,
+      directionId: data.directionId,
+      groupId: data.groupId,
     });
   }
 

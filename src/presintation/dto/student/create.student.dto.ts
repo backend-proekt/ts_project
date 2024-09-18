@@ -7,6 +7,6 @@ export class CreateStudentDto implements ICreateStudentDto {
   parents_fio: string;
   phone_number: string;
   email: string;
-  directionId?: string;
-  groupId?: string;
+  directionId: string;
+  groupId: string;
 }

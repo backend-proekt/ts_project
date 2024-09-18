@@ -6,5 +6,4 @@ export interface ITaskService {
   getAllTasks(userId: string): Promise<TaskEntity[]>;
   findTaskById(id: string): Promise<TaskEntity>;
   deleteTask(id: string): Promise<void>;
-  createTaskForGroup(userId: string, groupId: string, title: string, description: string, stage: string, createdAt: string | null, endDate: string | null)
 }
