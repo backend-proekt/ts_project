@@ -5,5 +5,4 @@ export interface ICreateApplicationDto {
   phone_number: string;
   email: string;
   status: string;
-  directionId: string;
 }

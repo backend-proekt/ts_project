@@ -7,4 +7,5 @@ export interface IApplicationRepository {
   findByEmail(email: string): Promise<IApplicationEntity>;
   findOne(applicationId: string): Promise<IApplicationEntity>;
   addApplicationToDirection(application: IApplicationEntity)
+  addApplicationToGroup(application: IApplicationEntity)
 }

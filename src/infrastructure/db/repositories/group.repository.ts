@@ -24,7 +24,7 @@ export class GroupRepository implements IGroupRepository {
 
     async findOne(groupId: string): Promise<IGroupEntity> {
         try {
-            return await this.groupRepository.findOne({ where: { id: groupId }, relations: ["direction", "students"] });
+            return await this.groupRepository.findOne({ where: { id: groupId }, relations: ["users"] });
         } catch (error) {
             throw new Error('Group not found');
         }
@@ -32,7 +32,7 @@ export class GroupRepository implements IGroupRepository {
 
     async getGroup(groupId: string) {
         try {
-            return await this.groupRepository.findOne({ where: { id: groupId }, relations: ["direction", "students"] });
+            return await this.groupRepository.findOne({ where: { id: groupId }, relations: ["users", "tasks"] });
         } catch (error) {
             throw new Error('Group not found');
         }

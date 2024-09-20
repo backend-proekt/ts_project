@@ -6,6 +6,7 @@ export class CreateTaskDto implements ICreateTaskDto {
   userId: string;
   title: string;
   description: string;
+  groupId?: string;
   createdAt: string | null;
   endDate: string | null;
 }

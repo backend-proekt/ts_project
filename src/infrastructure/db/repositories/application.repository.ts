@@ -61,4 +61,12 @@ export class ApplicationRepository implements IApplicationRepository {
       throw new Error(error);
     }
   }
+
+  async addApplicationToGroup(application: IApplicationEntity) {
+    try {
+      return await this.applicationRepository.save(application);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }

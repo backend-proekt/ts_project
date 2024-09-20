@@ -6,4 +6,5 @@ export interface IUserRepository {
   findByEmail(email: string): Promise<IUserEntity>;
   findById(id: string): Promise<IUserEntity>;
   findOne(userId: string): Promise<IUserEntity>;
+  addUserToGroup(user: IUserEntity)
 }

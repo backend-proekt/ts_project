@@ -9,4 +9,4 @@ export interface IApplicationEntity {
   email: string;
   status: string;
   direction: IDirectionEntity[];
-}
+  }

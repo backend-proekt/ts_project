@@ -4,6 +4,7 @@ import { TaskEntity } from 'src/infrastructure/db/entities/task.entity';
 import { ICreateTaskDto } from '../interface/dto/create.task.interface.dto';
 import { ITaskRepository } from '../interface/repository/task.repository.interface';
 import { IUserRepository } from 'src/use-cases/user/interface/repository/user.repository.interface';
+import { IGroupRepository } from 'src/use-cases/group/interface/repository/group.repository.interface';
 
 @Injectable()
 export class TaskService implements ITaskService {
@@ -12,6 +13,8 @@ export class TaskService implements ITaskService {
     private readonly taskRepository: ITaskRepository,
     @Inject('userRepository')
     private readonly userRepository: IUserRepository,
+    @Inject('groupRepository')
+    private readonly groupRepository: IGroupRepository
   ) {}
 
   createTask(data: ICreateTaskDto, userId: string): Promise<TaskEntity> {
@@ -52,5 +55,34 @@ export class TaskService implements ITaskService {
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async createTaskForGroup(userId: string, groupId: string, title: string, description: string, stage: string, createdAt: string | null, endDate: string | null): Promise<TaskEntity> {
+    const user = await this.userRepository.findById(userId);
+    const group = await this.groupRepository.getGroup(groupId);
+
+    
+    if (!user || !group) {
+      throw new Error('User or Group not found');
+    }
+    
+    if (!group.users.some((groupUser) => groupUser.id === userId)) {
+      throw new Error('User is not a member of the group');
+    }
+
+    delete user["password"]
+    group.users.map((user) => delete user["password"])
+
+    const task = {
+      title: title,
+      description: description,
+      stage: stage,
+      user: user,
+      group: group,
+      createdAt: createdAt,
+      endDate: endDate,
+    }
+
+    return this.taskRepository.createTask(task);
   }
 }

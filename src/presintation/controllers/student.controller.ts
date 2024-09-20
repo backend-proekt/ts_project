@@ -36,8 +36,8 @@ export class StudentController {
         parents_fio: { type: 'string', default: '' },
         phone_number: { type: 'string', default: 'fdbskjfbdf' },
         email: { type: 'string', default: 'fdbskjfbdf' },
-        directionId: { type: 'string', default: ''},
-        groupId: { type: 'string', default: ''},
+        directionId: { type: 'IDirectionEntity[]', default: ''},
+        groupId: { type: 'IGroupEntity[]', default: ''},
       },
     },
   })

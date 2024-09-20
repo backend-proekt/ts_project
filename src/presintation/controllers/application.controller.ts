@@ -36,16 +36,14 @@ export class ApplicationController {
         phone_number: { type: 'string', default: 'fdbskjfbdf' },
         email: { type: 'string', default: 'fdbskjfbdf' },
         status: { type: 'string', default: 'новый' },
-        directionId: { type: 'string' },
       },
     },
   })
   @ApiResponse({ status: 201, description: 'The application has been successfully created.' })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
-  async createApplication(@Body() data: ICreateApplicationDto)  {
+  async createApplication(@Body() data: ICreateApplicationDto) {
     return await this.applicationService.createApplication(data);
   }
-
 
   @Get(':applicationId')
   @ApiOperation({ summary: 'Get the application' })
@@ -91,5 +89,13 @@ export class ApplicationController {
     @Param('directionId') directionId: string,
   ): Promise<void> {
     await this.applicationService.addApplicationToDirection(applicationId, directionId);
+  }
+
+  @Post(':applicationId/groups/:groupId')
+  async addApplicationToGroup(
+    @Param('applicationId') applicationId: string,
+    @Param('groupId') groupId: string,
+  ): Promise<void> {
+    await this.applicationService.addApplicationToGroup(applicationId, groupId);
   }
 }

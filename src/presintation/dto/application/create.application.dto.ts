@@ -7,5 +7,5 @@ export class CreateApplicationDto implements ICreateApplicationDto {
   phone_number: string;
   email: string;
   status: string;
-  directionId: string;
+  directionId?: string;
 }

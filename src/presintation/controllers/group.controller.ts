@@ -39,8 +39,7 @@ export class GroupController {
   @ApiBody({
     schema: {
       properties: {
-        name: { type: 'string', default: 'Group name' },  
-        derectionId: { type: 'string', default: 'Group name' },
+        name: { type: 'string', default: 'Group name' },
       },
     },
   })

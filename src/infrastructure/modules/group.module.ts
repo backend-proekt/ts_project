@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GroupEntity } from '../db/entities/group.entity';
+import { UserEntity } from '../db/entities/user.entity';
 import { GroupController } from 'src/presintation/controllers/group.controller';
 import { GroupRepository } from '../db/repositories/group.repository';
 import { GroupService } from 'src/use-cases/group/service/group.service';
-import { DirectionRepository } from '../db/repositories/direction.repository';
-import { DirectionEntity } from '../db/entities/direction.entity';
-import { StudentRepository } from '../db/repositories/student.repository';
-import { StudentEntity } from '../db/entities/student.entity';
+import { UserRepository } from '../db/repositories/user.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([GroupEntity, DirectionEntity, StudentEntity]),
+    TypeOrmModule.forFeature([GroupEntity, UserEntity]),
   ],
   providers: [
     {
@@ -23,13 +21,9 @@ import { StudentEntity } from '../db/entities/student.entity';
         useClass: GroupService,
     },
     {
-      provide: 'directionRepository',
-      useClass: DirectionRepository,
-    },
-    {
-      provide: 'studentRepository',
-      useClass: StudentRepository,
-    },
+        provide: 'userRepository',
+        useClass: UserRepository,
+    }
   ],
   controllers: [GroupController],
 })
