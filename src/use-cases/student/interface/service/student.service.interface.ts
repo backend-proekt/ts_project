@@ -6,5 +6,4 @@ export interface IStudentService {
   findByFio(fio: string): Promise<IStudentEntity>;
   findByEmail(email: string): Promise<IStudentEntity>;
   addStudentToDirection(studentId: string, directionId: string): Promise<void>;
-  addStudentToGroup(studentId: string, groupId: string): Promise<void>;
 }

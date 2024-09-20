@@ -36,7 +36,4 @@ export class StudentEntity {
 
   @ManyToOne(() => DirectionEntity, (direction) => direction.students)
   direction: DirectionEntity[];
-
-  @ManyToOne(() => GroupEntity, (group) => group.students)
-  group: GroupEntity[];
 }

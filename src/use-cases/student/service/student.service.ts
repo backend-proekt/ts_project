@@ -3,7 +3,6 @@ import { IStudentService } from '../interface/service/student.service.interface'
 import { IStudentRepository } from '../interface/repository/student.repository.interface';
 import { IStudentEntity } from 'src/entiies/student/interface/student.entity.interface';
 import { ICreateStudentDto } from '../interface/dto/create.student.dto.interface';
-import { IGroupRepository } from 'src/use-cases/group/interface/repository/group.repository.interface';
 import { IDirectionRepository } from 'src/use-cases/direction/interface/repository/direction.repository.interface';
 
 @Injectable()
@@ -13,8 +12,6 @@ export class StudentService implements IStudentService {
     private readonly studentRepository: IStudentRepository,
     @Inject('directionRepository')
     private readonly directionRepository: IDirectionRepository,
-    @Inject('groupRepository')
-    private readonly groupRepository: IGroupRepository,
   ) {}
 
   async createStudent(data: ICreateStudentDto): Promise<IStudentEntity> {
@@ -44,13 +41,4 @@ export class StudentService implements IStudentService {
       throw new Error('Student or Direction not found');
     }
   }
-
-  async addStudentToGroup(studentId: string, groupId: string): Promise<void> {
-    const student = await this.studentRepository.findOne(studentId);
-    const group = await this.groupRepository.findOne(groupId);
-
-    if (!student || !group) {
-      throw new Error('Student or Group not found');
-    }
-  } 
 }

@@ -8,5 +8,4 @@ export class CreateStudentDto implements ICreateStudentDto {
   phone_number: string;
   email: string;
   directionId?: string;
-  groupId?: string;
 }

@@ -37,7 +37,6 @@ export class StudentController {
         phone_number: { type: 'string', default: 'fdbskjfbdf' },
         email: { type: 'string', default: 'fdbskjfbdf' },
         directionId: { type: 'IDirectionEntity[]', default: ''},
-        groupId: { type: 'IGroupEntity[]', default: ''},
       },
     },
   })
@@ -91,13 +90,5 @@ export class StudentController {
     @Param('directionId') directionId: string,
   ): Promise<void> {
     await this.studentService.addStudentToDirection(studentId, directionId);
-  }
-
-  @Post(':studentId/groups/:groupId')
-  async addStudentToGroup(
-    @Param('studentId') studentId: string,
-    @Param('groupId') groupId: string,
-  ): Promise<void> {
-    await this.studentService.addStudentToGroup(studentId, groupId);
   }
 }

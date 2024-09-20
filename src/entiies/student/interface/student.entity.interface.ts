@@ -9,6 +9,4 @@ export interface IStudentEntity {
   phone_number: string;
   email: string;
   direction: DirectionEntity[];   
-  group: GroupEntity[];
 }
-  

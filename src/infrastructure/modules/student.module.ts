@@ -6,12 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from '../db/entities/student.entity';
 import { DirectionRepository } from '../db/repositories/direction.repository';
 import { DirectionEntity } from '../db/entities/direction.entity';
-import { GroupRepository } from '../db/repositories/group.repository';
-import { GroupEntity } from '../db/entities/group.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentEntity, GroupEntity, DirectionEntity])],
+  imports: [TypeOrmModule.forFeature([StudentEntity, DirectionEntity])],
   controllers: [StudentController],
   providers: [
     {
@@ -26,10 +24,6 @@ import { GroupEntity } from '../db/entities/group.entity';
         provide: 'directionRepository',
         useClass: DirectionRepository,
     },
-    {
-      provide: 'groupRepository',
-      useClass: GroupRepository,
-    }
   ],
 })
 export class StudentModule {}

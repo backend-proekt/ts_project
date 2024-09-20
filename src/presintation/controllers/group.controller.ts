@@ -20,8 +20,9 @@ import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { ICreateGroupDto } from 'src/use-cases/group/interface/dto/create.group.dto.interface';
 import { IGroupService } from 'src/use-cases/group/interface/service/group.service.interface';
 
-@Controller('groups')
+@Controller('group')
 @ApiTags('Group')
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class GroupController {
   constructor(
@@ -29,7 +30,7 @@ export class GroupController {
     private readonly groupService: IGroupService,
   ) {}
 
-  @Post('/groups')
+  @Post('create')
   @ApiOperation({ summary: 'Create a new group' })
   @ApiResponse({
     status: 201,

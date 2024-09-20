@@ -13,9 +13,6 @@ export class DirectionEntity {
   @IsNotEmpty()
   name: string;
 
-  @OneToMany(() => GroupEntity, (group) => group.direction)
-  groups: GroupEntity[];
-
   @OneToMany(() => StudentEntity, (student) => student.direction)
   students: StudentEntity[];
 

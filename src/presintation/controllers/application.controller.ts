@@ -9,14 +9,12 @@ import {
   ApiBody,
   ApiConsumes,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { Response } from 'express';
 import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
 
 
 @Controller('application')
 @ApiTags('Application')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class ApplicationController {
   constructor(
@@ -35,7 +33,8 @@ export class ApplicationController {
         parents_fio: { type: 'string', default: '' },
         phone_number: { type: 'string', default: 'fdbskjfbdf' },
         email: { type: 'string', default: 'fdbskjfbdf' },
-        status: { type: 'string', default: 'новый' },
+        status: { type: 'string', default: 'Новый' },
+        direction: { type: 'string', default: 'fdbskjfbdf' }
       },
     },
   })
@@ -66,6 +65,8 @@ export class ApplicationController {
         parents_fio: application.parents_fio,
         phone_number: application.phone_number,
         email: application.email,
+        status: application.status,
+        direction: application.direction,
     };
   }
 

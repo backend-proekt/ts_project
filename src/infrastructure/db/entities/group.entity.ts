@@ -20,10 +20,4 @@ export class GroupEntity {
 
   @OneToMany(() => TaskEntity, (task) => task.group)
   tasks: TaskEntity[];
-
-  @ManyToOne(() => DirectionEntity, (direction) => direction.groups)
-  direction: DirectionEntity[];
-
-  @OneToMany(() => StudentEntity, (student) => student.group)
-  students: StudentEntity[];
 }
