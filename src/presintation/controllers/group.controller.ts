@@ -22,7 +22,6 @@ import { IGroupService } from 'src/use-cases/group/interface/service/group.servi
 
 @Controller('groups')
 @ApiTags('Group')
-@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class GroupController {
   constructor(
@@ -30,7 +29,7 @@ export class GroupController {
     private readonly groupService: IGroupService,
   ) {}
 
-  @Post()
+  @Post('/groups')
   @ApiOperation({ summary: 'Create a new group' })
   @ApiResponse({
     status: 201,

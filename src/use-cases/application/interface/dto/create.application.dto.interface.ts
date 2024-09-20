@@ -1,5 +1,4 @@
 export interface ICreateApplicationDto {
-  id?: string;
   fio: string;
   date: string;
   parents_fio: string

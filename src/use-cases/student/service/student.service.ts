@@ -31,10 +31,6 @@ export class StudentService implements IStudentService {
     });
   }
 
-  async findById(id: string): Promise<IStudentEntity> {
-    return this.studentRepository.findById(id);
-  }
-
   async findByEmail(email: string): Promise<IStudentEntity> {
     return await this.studentRepository.findByEmail(email);
   }

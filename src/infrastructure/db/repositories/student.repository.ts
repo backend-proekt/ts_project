@@ -22,14 +22,6 @@ export class StudentRepository implements IStudentRepository {
     }
   }
 
-  async findById(id: string): Promise<IStudentEntity> {
-    try {
-      return this.studentRepository.findOneBy({ id });
-    } catch (error) {
-      throw new Error('Student not found');
-    }
-  }
-
   findByEmail(email: string): Promise<IStudentEntity> {
     try {
       return this.studentRepository.findOneBy({ email });

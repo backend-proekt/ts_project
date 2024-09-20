@@ -30,7 +30,6 @@ export class ApplicationController {
   @ApiBody({
     schema: {
       properties: {
-        id: { type: 'string', default: 'fdbskjfbdf' },
         fio: { type: 'string', default: 'fdbskjfbdf' },
         date: { type: 'string', default: 'fdbskjfbdf' },
         parents_fio: { type: 'string', default: '' },

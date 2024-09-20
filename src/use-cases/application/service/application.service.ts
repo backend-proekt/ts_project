@@ -27,10 +27,6 @@ export class ApplicationService implements IApplicationService {
     });
   }
 
-  async findById(id: string): Promise<IApplicationEntity> {
-    return this.applicationRepository.findById(id);
-  }
-
   async findByFio(fio: string): Promise<IApplicationEntity> {
     return await this.applicationRepository.findByFio(fio);
   }
