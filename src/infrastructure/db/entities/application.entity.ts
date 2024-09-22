@@ -14,28 +14,40 @@ export class ApplicationEntity {
 
   @Column('varchar')
   @IsNotEmpty()
-  fio: string;
+  status: string;
 
   @Column('varchar')
   @IsNotEmpty()
-  date: string;
-
-  @Column('varchar')
-  parents_fio: string;
+  typeOfLearning: string;
 
   @Column('varchar')
   @IsNotEmpty()
-  @MinLength(10)
-  phone_number: string;
+  fullName: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  age: string;
+
+  @Column('varchar')
+  city: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  specialty: string;
+
+  @Column('varchar')
+  parentsName: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  phone: string;
 
   @Column('varchar')
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @Column('varchar')
-  @IsNotEmpty()
-  status: string;
+  url: string;
 
   @ManyToOne(() => DirectionEntity, (direction) => direction.applications)
   direction: DirectionEntity[];

@@ -7,7 +7,7 @@ import { UserEntity } from 'src/infrastructure/db/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class AuthServidce implements IAuthService {
+export class AuthService implements IAuthService {
   constructor(
     @Inject('userService')
     private readonly userService: IUserService,

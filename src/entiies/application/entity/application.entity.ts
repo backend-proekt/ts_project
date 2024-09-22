@@ -4,20 +4,29 @@ import { TApplicationEntity } from '../type/application.entity.type';
 
 export class ApplicationEntity implements IApplicationEntity {
   id?: string;
-  fio: string;
-  date: string;
-  parents_fio: string
-  phone_number: string;
+  status?: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
   email: string;
-  status: string;
+  url: string;
   direction: IDirectionEntity[];
 
   constructor(data: TApplicationEntity) {
     this.id = data.id;
-    this.fio = data.fio;
-    this.date = data.date;
-    this.parents_fio = data.parents_fio;
-    this.phone_number = data.phone_number;
+    this.status = data.status;
+    this.typeOfLearning = data.typeOfLearning;
+    this.fullName = data.fullName;
+    this.age = data.age;
+    this.city = data.city;
+    this.specialty = data.specialty;
+    this.parentsName = data.parentsName;
+    this.phone = data.phone;
     this.email = data.email;
+    this.url = data.url;
   }
 }

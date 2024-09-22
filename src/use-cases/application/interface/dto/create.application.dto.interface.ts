@@ -1,8 +1,13 @@
 export interface ICreateApplicationDto {
-  fio: string;
-  date: string;
-  parents_fio: string
-  phone_number: string;
+  id?: string;
+  status?: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
   email: string;
-  status: string;
+  url: string;
 }

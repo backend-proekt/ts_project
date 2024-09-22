@@ -9,12 +9,14 @@ import {
   ApiBody,
   ApiConsumes,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { Response } from 'express';
 import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
 
 
 @Controller('application')
 @ApiTags('Application')
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class ApplicationController {
   constructor(
@@ -28,13 +30,15 @@ export class ApplicationController {
   @ApiBody({
     schema: {
       properties: {
-        fio: { type: 'string', default: 'fdbskjfbdf' },
-        date: { type: 'string', default: 'fdbskjfbdf' },
-        parents_fio: { type: 'string', default: '' },
-        phone_number: { type: 'string', default: 'fdbskjfbdf' },
-        email: { type: 'string', default: 'fdbskjfbdf' },
-        status: { type: 'string', default: 'Новый' },
-        direction: { type: 'string', default: 'fdbskjfbdf' }
+        typeOfLearning: { type: 'string', default: 'test' },
+        fullName: { type: 'string', default: 'test' },
+        age: { type: 'string', default: 'test' },
+        city: { type: 'string', default: 'test' },
+        specialty: { type: 'string', default: 'test' },
+        parentsName: { type: 'string', default: 'test' },
+        phone: { type: 'string', default: 'test' },
+        email: { type: 'string', default: 'test' },
+        url: { type: 'string', default: 'test' },
       },
     },
   })
@@ -44,15 +48,14 @@ export class ApplicationController {
     return await this.applicationService.createApplication(data);
   }
 
-  @Get(':applicationId')
-  @ApiOperation({ summary: 'Get the application' })
-  @ApiResponse({ status: 200, description: 'Return the application' })
-  @ApiResponse({ status: 404, description: 'Application not found' })
-  @ApiParam({
-    name: 'applicationId',
-    description: 'ID of the application to retrieve',
-    type: String,
-  })
+  @Get('get/:id')
+  @ApiOperation({ summary: 'Get a application by its ID' })
+  @ApiParam({ name: 'id', description: 'Application ID', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the application with the given ID.' })
+  @ApiResponse({ status: 404, description: 'Application not found.' })
+  async findApplicationById(@Param('id') id: string) {
+    return await this.applicationService.findApplicationById(id);
+  }
 
   @Get('findApplication/:email')
   async findByEmail(@Param('email') email: string) {
@@ -60,13 +63,16 @@ export class ApplicationController {
 
     return {
         id: application.id,
-        fio: application.fio,
-        date: application.date,
-        parents_fio: application.parents_fio,
-        phone_number: application.phone_number,
-        email: application.email,
         status: application.status,
-        direction: application.direction,
+        typeOfLearning: application.typeOfLearning,
+        fullName: application.fullName,
+        age: application.age,
+        city: application.city,
+        specialty: application.specialty,
+        parentsName: application.parentsName,
+        phone: application.phone,
+        email: application.email,
+        url: application.url,
     };
   }
 
@@ -75,12 +81,17 @@ export class ApplicationController {
     const application = await this.applicationService.findByFio(fio);
 
     return {
-        id: application.id,
-        fio: application.fio,
-        date: application.date,
-        parents_fio: application.parents_fio,
-        phone_number: application.phone_number,
-        email: application.email,
+      id: application.id,
+      status: application.status,
+      typeOfLearning: application.typeOfLearning,
+      fullName: application.fullName,
+      age: application.age,
+      city: application.city,
+      specialty: application.specialty,
+      parentsName: application.parentsName,
+      phone: application.phone,
+      email: application.email,
+      url: application.url,
     };
   }
 
@@ -90,13 +101,5 @@ export class ApplicationController {
     @Param('directionId') directionId: string,
   ): Promise<void> {
     await this.applicationService.addApplicationToDirection(applicationId, directionId);
-  }
-
-  @Post(':applicationId/groups/:groupId')
-  async addApplicationToGroup(
-    @Param('applicationId') applicationId: string,
-    @Param('groupId') groupId: string,
-  ): Promise<void> {
-    await this.applicationService.addApplicationToGroup(applicationId, groupId);
   }
 }

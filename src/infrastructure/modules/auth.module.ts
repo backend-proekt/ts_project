@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './user.module';
 import { PassportModule } from '@nestjs/passport';
-import { AuthServidce } from 'src/use-cases/auth/service/auth.service';
+import { AuthService } from 'src/use-cases/auth/service/auth.service';
 import { AuthController } from 'src/presintation/controllers/auth.controller';
 import { LocalStrategy } from '../JWT/strategies/local.strategy';
 import { JwtStrategy } from '../JWT/strategies/jwt.strategy';
@@ -22,9 +22,9 @@ import { GroupEntity } from '../db/entities/group.entity';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          secret: configService.get('SECRET_KEY'),
+          secret: configService.getOrThrow('JWT_SECRET_KEY'),
           signOptions: {
-            expiresIn: configService.get('EXPIRES_IN'),
+            expiresIn: configService.getOrThrow('EXPIRES_IN'),
           },
         };
       },
@@ -34,7 +34,7 @@ import { GroupEntity } from '../db/entities/group.entity';
   ],
   controllers: [AuthController],
   providers: [
-    { provide: 'authService', useClass: AuthServidce },
+    { provide: 'authService', useClass: AuthService },
     { provide: 'userService', useClass: UserService },
     { provide: 'userRepository', useClass: UserRepository },
     {

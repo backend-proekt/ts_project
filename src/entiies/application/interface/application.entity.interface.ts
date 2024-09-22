@@ -2,11 +2,15 @@ import { IDirectionEntity } from "src/entiies/direction/interface/direction.enti
 
 export interface IApplicationEntity {
   id?: string;
-  fio: string;
-  date: string;
-  parents_fio: string
-  phone_number: string;
+  status?: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
   email: string;
-  status: string;
+  url: string;
   direction: IDirectionEntity[];
   }

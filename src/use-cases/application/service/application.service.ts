@@ -4,7 +4,6 @@ import { IApplicationRepository } from '../interface/repository/application.repo
 import { IApplicationEntity } from 'src/entiies/application/interface/application.entity.interface';
 import { ICreateApplicationDto } from '../interface/dto/create.application.dto.interface';
 import { IDirectionRepository } from 'src/use-cases/direction/interface/repository/direction.repository.interface';
-import { IGroupRepository } from 'src/use-cases/group/interface/repository/group.repository.interface';
 
 @Injectable()
 export class ApplicationService implements IApplicationService {
@@ -13,20 +12,26 @@ export class ApplicationService implements IApplicationService {
     private readonly applicationRepository: IApplicationRepository,
     @Inject('directionRepository')
     private readonly directionRepository: IDirectionRepository,
-    @Inject('groupRepository')
-    private readonly groupRepository: IGroupRepository,
   ) {}
 
   async createApplication(data: ICreateApplicationDto): Promise<IApplicationEntity> {
 
     return this.applicationRepository.createApplication({
-    fio: data.fio,
-    date: data.date,
-    parents_fio: data.parents_fio,
-    phone_number: data.phone_number,
-    email: data.email,
-    status: data.status,
+      status: "Новый",
+      typeOfLearning: data.typeOfLearning,
+      fullName: data.fullName,
+      age: data.age,
+      city: data.city,
+      specialty: data.specialty,
+      parentsName: data.parentsName,
+      phone: data.phone,
+      email: data.email,
+      url: data.url,
     });
+  }
+
+  async findApplicationById(id: string): Promise<IApplicationEntity> {
+    return await this.applicationRepository.findApplicationById(id);
   }
 
   async findByFio(fio: string): Promise<IApplicationEntity> {
@@ -43,15 +48,6 @@ export class ApplicationService implements IApplicationService {
 
     if (!application || !direction) {
       throw new Error('Application or Direction not found');
-    }
-  }
-
-  async addApplicationToGroup(applicationId: string, groupId: string): Promise<void> {
-    const application = await this.applicationRepository.findOne(applicationId);
-    const group = await this.groupRepository.findOne(groupId);
-
-    if (!application || !group) {
-      throw new Error('Application or Group not found');
     }
   }
 }

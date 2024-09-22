@@ -22,7 +22,7 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
-  async findById(id: string): Promise<IApplicationEntity> {
+  async findApplicationById(id: string): Promise<IApplicationEntity> {
     try {
       return this.applicationRepository.findOneBy({ id });
     } catch (error) {
@@ -38,9 +38,9 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
-  findByFio(fio: string): Promise<IApplicationEntity> {
+  findByFio(fullName: string): Promise<IApplicationEntity> {
     try {
-      return this.applicationRepository.findOneBy({ fio });
+      return this.applicationRepository.findOneBy({ fullName });
     } catch (error) {
       throw new Error('Application not found');
     }
@@ -55,14 +55,6 @@ export class ApplicationRepository implements IApplicationRepository {
   }
 
   async addApplicationToDirection(application: IApplicationEntity) {
-    try {
-      return await this.applicationRepository.save(application);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  async addApplicationToGroup(application: IApplicationEntity) {
     try {
       return await this.applicationRepository.save(application);
     } catch (error) {
