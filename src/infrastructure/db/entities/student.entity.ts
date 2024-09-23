@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { DirectionEntity } from './direction.entity';
-import { GroupEntity } from './group.entity';
 
 @Entity() 
 export class StudentEntity {
@@ -15,24 +14,37 @@ export class StudentEntity {
 
   @Column('varchar')
   @IsNotEmpty()
-  fio: string;
+  typeOfLearning: string;
 
   @Column('varchar')
   @IsNotEmpty()
-  date: string;
-
-  @Column('varchar')
-  parents_fio: string;
+  fullName: string;
 
   @Column('varchar')
   @IsNotEmpty()
-  @MinLength(10)
-  phone_number: string;
+  age: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  city: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  specialty: string;
+
+  @Column('varchar')
+  parentsName: string;
+
+  @Column('varchar')
+  @IsNotEmpty()
+  phone: string;
 
   @Column('varchar')
   @IsEmail()
-  @IsNotEmpty()
   email: string;
+
+  @Column('varchar')
+  url: string;
 
   @ManyToOne(() => DirectionEntity, (direction) => direction.students)
   direction: DirectionEntity[];

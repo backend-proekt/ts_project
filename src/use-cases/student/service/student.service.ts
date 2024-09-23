@@ -17,11 +17,15 @@ export class StudentService implements IStudentService {
   async createStudent(data: ICreateStudentDto): Promise<IStudentEntity> {
 
     return this.studentRepository.createStudent({
-      fio: data.fio,
-      date: data.date,
-      parents_fio: data.parents_fio,
-      phone_number: data.phone_number,
+      typeOfLearning: data.typeOfLearning,
+      fullName: data.fullName,
+      age: data.age,
+      city: data.city,
+      specialty: data.specialty,
+      parentsName: data.parentsName,
+      phone: data.phone,
       email: data.email,
+      url: data.url,
     });
   }
 
@@ -29,8 +33,8 @@ export class StudentService implements IStudentService {
     return await this.studentRepository.findByEmail(email);
   }
 
-  async findByFio(fio: string): Promise<IStudentEntity> {
-    return await this.studentRepository.findByFio(fio);
+  async findByName(fullName: string): Promise<IStudentEntity> {
+    return await this.studentRepository.findByName(fullName);
   }
 
   async addStudentToDirection(studentId: string, directionId: string): Promise<void> {

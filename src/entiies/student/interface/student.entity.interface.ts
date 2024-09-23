@@ -1,12 +1,12 @@
-import { GroupEntity } from "src/infrastructure/db/entities/group.entity";
-import { DirectionEntity } from "src/infrastructure/db/entities/direction.entity";
-
 export interface IStudentEntity {
   id?: string;
-  fio: string;
-  date: string;
-  parents_fio: string;
-  phone_number: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
   email: string;
-  direction: DirectionEntity[];   
+  url: string;
 }

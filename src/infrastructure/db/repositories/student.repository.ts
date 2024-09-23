@@ -30,9 +30,9 @@ export class StudentRepository implements IStudentRepository {
     }
   }
 
-  findByFio(fio: string): Promise<IStudentEntity> {
+  findByName(fullName: string): Promise<IStudentEntity> {
     try {
-      return this.studentRepository.findOneBy({ fio });
+      return this.studentRepository.findOneBy({ fullName });
     } catch (error) {
       throw new Error('Student not found');
     }
@@ -47,14 +47,6 @@ export class StudentRepository implements IStudentRepository {
   }
 
   async addStudentToDirection(student: IStudentEntity) {
-    try {
-      return await this.studentRepository.save(student);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  async addStudentToGroup(student: IStudentEntity) {
     try {
       return await this.studentRepository.save(student);
     } catch (error) {

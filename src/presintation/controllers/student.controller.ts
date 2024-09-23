@@ -30,13 +30,15 @@ export class StudentController {
   @ApiBody({
     schema: {
       properties: {
-        id: { type: 'string', default: 'fdbskjfbdf' },
-        fio: { type: 'string', default: 'fdbskjfbdf' },
-        date: { type: 'string', default: 'fdbskjfbdf' },
-        parents_fio: { type: 'string', default: '' },
-        phone_number: { type: 'string', default: 'fdbskjfbdf' },
-        email: { type: 'string', default: 'fdbskjfbdf' },
-        directionId: { type: 'IDirectionEntity[]', default: ''},
+        typeOfLearning: { type: 'string', default: 'test' },
+        fullName: { type: 'string', default: 'test' },
+        age: { type: 'string', default: 'test' },
+        city: { type: 'string', default: 'test' },
+        specialty: { type: 'string', default: 'test' },
+        parentsName: { type: 'string', default: 'test' },
+        phone: { type: 'string', default: 'test' },
+        email: { type: 'string', default: 'test' },
+        url: { type: 'string', default: 'test' },
       },
     },
   })
@@ -62,25 +64,33 @@ export class StudentController {
 
     return {
         id: student.id,
-        fio: student.fio,
-        date: student.date,
-        parents_fio: student.parents_fio,
-        phone_number: student.phone_number,
+        typeOfLearning: student.typeOfLearning,
+        fullName: student.fullName,
+        age: student.age,
+        city: student.city,
+        specialty: student.specialty,
+        parentsName: student.parentsName,
+        phone: student.phone,
         email: student.email,
+        url: student.url,
     };
   }
 
-  @Get('findStudent/:fio')
-  async findByFio(@Param('fio') fio: string) {
-    const student = await this.studentService.findByFio(fio);
+  @Get('findStudent/:fullName')
+  async findByName(@Param('fullName') fullName: string) {
+    const student = await this.studentService.findByName(fullName);
 
     return {
-        id: student.id,
-        fio: student.fio,
-        date: student.date,
-        parents_fio: student.parents_fio,
-        phone_number: student.phone_number,
-        email: student.email,
+      id: student.id,
+      typeOfLearning: student.typeOfLearning,
+      fullName: student.fullName,
+      age: student.age,
+      city: student.city,
+      specialty: student.specialty,
+      parentsName: student.parentsName,
+      phone: student.phone,
+      email: student.email,
+      url: student.url,
     };
   }
 

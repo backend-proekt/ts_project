@@ -34,8 +34,8 @@ export class ApplicationService implements IApplicationService {
     return await this.applicationRepository.findApplicationById(id);
   }
 
-  async findByFio(fio: string): Promise<IApplicationEntity> {
-    return await this.applicationRepository.findByFio(fio);
+  async findByName(fullName: string): Promise<IApplicationEntity> {
+    return await this.applicationRepository.findByName(fullName);
   }
 
   async findByEmail(email: string): Promise<IApplicationEntity> {

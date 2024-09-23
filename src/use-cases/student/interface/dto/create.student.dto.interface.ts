@@ -1,9 +1,13 @@
 export interface ICreateStudentDto {
-    id?: string;
-    fio: string;
-    date: string;
-    parents_fio: string;
-    phone_number: string;
-    email: string;
-  }
+  id?: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
+  email: string;
+  url: string;
+}
   

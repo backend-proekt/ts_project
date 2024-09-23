@@ -3,7 +3,7 @@ import { ICreateStudentDto } from '../dto/create.student.dto.interface';
 
 export interface IStudentRepository {
   createStudent(data: ICreateStudentDto): Promise<IStudentEntity>;
-  findByFio(fio: string): Promise<IStudentEntity>;
+  findByName(FullName: string): Promise<IStudentEntity>;
   findByEmail(email: string): Promise<IStudentEntity>;
   findOne(studentId: string): Promise<IStudentEntity>;
   addStudentToDirection(student: IStudentEntity)

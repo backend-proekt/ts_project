@@ -76,9 +76,9 @@ export class ApplicationController {
     };
   }
 
-  @Get('findApplication/:fio')
-  async findByFio(@Param('fio') fio: string) {
-    const application = await this.applicationService.findByFio(fio);
+  @Get('findApplication/:Name')
+  async findByFio(@Param('fullName') fullName: string) {
+    const application = await this.applicationService.findByName(fullName);
 
     return {
       id: application.id,

@@ -38,7 +38,7 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
-  findByFio(fullName: string): Promise<IApplicationEntity> {
+  findByName(fullName: string): Promise<IApplicationEntity> {
     try {
       return this.applicationRepository.findOneBy({ fullName });
     } catch (error) {

@@ -13,4 +13,4 @@ export interface IApplicationEntity {
   email: string;
   url: string;
   direction: IDirectionEntity[];
-  }
+}

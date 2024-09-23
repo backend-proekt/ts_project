@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, OneToMany } from 'typeorm';
-import { GroupEntity } from './group.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { StudentEntity } from './student.entity';
 import { ApplicationEntity } from './application.entity';
 import { IsNotEmpty } from 'class-validator';

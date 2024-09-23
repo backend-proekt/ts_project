@@ -2,10 +2,13 @@ import { ICreateStudentDto } from 'src/use-cases/student/interface/dto/create.st
 
 export class CreateStudentDto implements ICreateStudentDto {
   id?: string;
-  fio: string;
-  date: string;
-  parents_fio: string;
-  phone_number: string;
+  typeOfLearning: string;
+  fullName: string;
+  age: string;
+  city: string;
+  specialty: string;
+  parentsName: string;
+  phone: string;
   email: string;
-  directionId?: string;
+  url: string;
 }
