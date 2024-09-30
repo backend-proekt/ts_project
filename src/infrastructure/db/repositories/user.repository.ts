@@ -40,17 +40,11 @@ export class UserRepository implements IUserRepository {
 
   async findOne(userId: string): Promise<IUserEntity> {
     try {
-      return this.userRepository.findOne({ where: { id: userId }, relations: ["groups"] });
+      return this.userRepository.findOne({ where: { id: userId } });
     } catch (error) {
       throw new Error('User not found');
     }
   }
 
-  async addUserToGroup(user: IUserEntity) {
-    try {
-      return await this.userRepository.save(user);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+
 }

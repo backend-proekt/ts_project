@@ -4,11 +4,10 @@ import { UserService } from 'src/use-cases/user/service/user.service';
 import { UserRepository } from '../db/repositories/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../db/entities/user.entity';
-import { GroupRepository } from '../db/repositories/group.repository';
-import { GroupEntity } from '../db/entities/group.entity';
+
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, GroupEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
   providers: [
     {
@@ -18,10 +17,6 @@ import { GroupEntity } from '../db/entities/group.entity';
     {
       provide: 'userService',
       useClass: UserService,
-    },
-    {
-      provide: 'groupRepository',
-      useClass: GroupRepository,
     }
   ],
 })

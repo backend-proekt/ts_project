@@ -37,11 +37,4 @@ export class UserController {
     };
   }
 
-  @Post(':userId/groups/:groupId')
-  async addUserToGroup(
-    @Param('userId') userId: string,
-    @Param('groupId') groupId: string,
-  ): Promise<void> {
-    await this.userService.addUserToGroup(userId, groupId);
-  }
 }

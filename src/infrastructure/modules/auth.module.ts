@@ -11,12 +11,11 @@ import { UserService } from 'src/use-cases/user/service/user.service';
 import { UserRepository } from '../db/repositories/user.repository';
 import { UserEntity } from '../db/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GroupRepository } from '../db/repositories/group.repository';
-import { GroupEntity } from '../db/entities/group.entity';
+
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity, GroupEntity]),
+    TypeOrmModule.forFeature([UserEntity]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -37,10 +36,6 @@ import { GroupEntity } from '../db/entities/group.entity';
     { provide: 'authService', useClass: AuthService },
     { provide: 'userService', useClass: UserService },
     { provide: 'userRepository', useClass: UserRepository },
-    {
-      provide: 'groupRepository',
-      useClass: GroupRepository,
-    },
     LocalStrategy,
     JwtStrategy,
   ],
