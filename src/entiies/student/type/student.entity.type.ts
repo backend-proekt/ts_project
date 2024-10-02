@@ -9,5 +9,5 @@ export type TStudentEntity = {
   phone: string;
   email: string;
   url: string;
-  directionId: string;
+  specialtyId: string;
 };

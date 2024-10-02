@@ -1,4 +1,4 @@
-import { IDirectionEntity } from 'src/entiies/direction/interface/direction.entity.interface';
+import { ISpecialtyEntity } from 'src/entiies/specialty/interface/specialty.entity.interface';
 import { IStudentEntity } from '../interface/student.entity.interface';
 import { TStudentEntity } from '../type/student.entity.type';
 
@@ -13,7 +13,7 @@ export class StudentEntity implements IStudentEntity {
   phone: string;
   email: string;
   url: string;
-  directionId: string;
+  specialtyId: string;
   
   
   constructor(data: TStudentEntity) {
@@ -27,6 +27,6 @@ export class StudentEntity implements IStudentEntity {
     this.phone = data.phone;
     this.email = data.email;
     this.url = data.url;
-    this.directionId = data.directionId;
+    this.specialtyId = data.specialtyId;
   }
 }

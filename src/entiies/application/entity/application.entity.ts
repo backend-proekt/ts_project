@@ -1,4 +1,4 @@
-import { IDirectionEntity } from 'src/entiies/direction/interface/direction.entity.interface';
+import { ISpecialtyEntity } from 'src/entiies/specialty/interface/specialty.entity.interface';
 import { IApplicationEntity } from '../interface/application.entity.interface';
 import { TApplicationEntity } from '../type/application.entity.type';
 
@@ -14,7 +14,7 @@ export class ApplicationEntity implements IApplicationEntity {
   phone: string;
   email: string;
   url: string;
-  direction: IDirectionEntity[];
+  specialtyId: ISpecialtyEntity[];
 
   constructor(data: TApplicationEntity) {
     this.id = data.id;

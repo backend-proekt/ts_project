@@ -45,12 +45,4 @@ export class StudentRepository implements IStudentRepository {
       throw new Error('Student not found');
     }
   }
-
-  async addStudentToDirection(student: IStudentEntity) {
-    try {
-      return await this.studentRepository.save(student);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
 }

@@ -4,12 +4,12 @@ import { StudentService } from 'src/use-cases/student/service/student.service';
 import { StudentRepository } from '../db/repositories/student.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from '../db/entities/student.entity';
-import { DirectionRepository } from '../db/repositories/direction.repository';
-import { DirectionEntity } from '../db/entities/direction.entity';
+import { SpecialtyRepository } from '../db/repositories/specialty.repository';
+import { SpecialtyEntity } from '../db/entities/specialty.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([StudentEntity, DirectionEntity])],
+  imports: [TypeOrmModule.forFeature([StudentEntity, SpecialtyEntity])],
   controllers: [StudentController],
   providers: [
     {
@@ -21,8 +21,8 @@ import { DirectionEntity } from '../db/entities/direction.entity';
       useClass: StudentService,
     },
     {
-        provide: 'directionRepository',
-        useClass: DirectionRepository,
+        provide: 'SpecialtyRepository',
+        useClass: SpecialtyRepository,
     },
   ],
 })

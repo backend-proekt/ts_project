@@ -6,5 +6,4 @@ export interface IStudentRepository {
   findByName(FullName: string): Promise<IStudentEntity>;
   findByEmail(email: string): Promise<IStudentEntity>;
   findOne(studentId: string): Promise<IStudentEntity>;
-  addStudentToDirection(student: IStudentEntity)
 }

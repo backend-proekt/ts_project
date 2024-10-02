@@ -4,12 +4,12 @@ import { ApplicationService } from 'src/use-cases/application/service/applicatio
 import { ApplicationRepository } from '../db/repositories/application.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApplicationEntity } from '../db/entities/application.entity';
-import { DirectionRepository } from '../db/repositories/direction.repository';
-import { DirectionEntity } from '../db/entities/direction.entity';
+import { SpecialtyRepository } from '../db/repositories/specialty.repository';
+import { SpecialtyEntity } from '../db/entities/specialty.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ApplicationEntity, DirectionEntity])],
+  imports: [TypeOrmModule.forFeature([ApplicationEntity, SpecialtyEntity])],
   controllers: [ApplicationController],
   providers: [
     {
@@ -21,8 +21,8 @@ import { DirectionEntity } from '../db/entities/direction.entity';
       useClass: ApplicationService,
     },
     {
-        provide: 'directionRepository',
-        useClass: DirectionRepository,
+        provide: 'SpecialtyRepository',
+        useClass: SpecialtyRepository,
     },
   ],
 })

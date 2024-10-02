@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { DirectionEntity } from './direction.entity';
+import { SpecialtyEntity } from './specialty.entity';
 
 @Entity() 
 export class StudentEntity {
@@ -46,6 +46,6 @@ export class StudentEntity {
   @Column('varchar')
   url: string;
 
-  @ManyToOne(() => DirectionEntity, (direction) => direction.students)
-  direction: DirectionEntity[];
+  @ManyToOne(() => SpecialtyEntity, (specialtyId) => specialtyId.students)
+  specialtyId: SpecialtyEntity[];
 }

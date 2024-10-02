@@ -1,4 +1,4 @@
-import { IDirectionEntity } from "src/entiies/direction/interface/direction.entity.interface";
+import { ISpecialtyEntity } from "src/entiies/specialty/interface/specialty.entity.interface";
 
 export interface IApplicationEntity {
   id?: string;
@@ -12,5 +12,5 @@ export interface IApplicationEntity {
   phone: string;
   email: string;
   url: string;
-  direction: IDirectionEntity[];
+  specialtyId: ISpecialtyEntity[];
 }

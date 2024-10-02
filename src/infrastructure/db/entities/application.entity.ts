@@ -1,11 +1,11 @@
-import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import {
   Column,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { DirectionEntity } from './direction.entity';
+import { SpecialtyEntity } from './specialty.entity';
 
 @Entity() 
 export class ApplicationEntity {
@@ -49,6 +49,6 @@ export class ApplicationEntity {
   @Column('varchar')
   url: string;
 
-  @ManyToOne(() => DirectionEntity, (direction) => direction.applications)
-  direction: DirectionEntity[];
+  @ManyToOne(() => SpecialtyEntity, (specialtyId) => specialtyId.applications)
+  specialtyId: SpecialtyEntity[];
 }

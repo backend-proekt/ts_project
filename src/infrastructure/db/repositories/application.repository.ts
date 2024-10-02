@@ -53,12 +53,4 @@ export class ApplicationRepository implements IApplicationRepository {
       throw new Error('Application not found');
     }
   }
-
-  async addApplicationToDirection(application: IApplicationEntity) {
-    try {
-      return await this.applicationRepository.save(application);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
 }

@@ -3,15 +3,15 @@ import { IStudentService } from '../interface/service/student.service.interface'
 import { IStudentRepository } from '../interface/repository/student.repository.interface';
 import { IStudentEntity } from 'src/entiies/student/interface/student.entity.interface';
 import { ICreateStudentDto } from '../interface/dto/create.student.dto.interface';
-import { IDirectionRepository } from 'src/use-cases/direction/interface/repository/direction.repository.interface';
+import { ISpecialtyRepository } from 'src/use-cases/specialty/interface/repository/specialty.repository.interface';
 
 @Injectable()
 export class StudentService implements IStudentService {
   constructor(
     @Inject('studentRepository')
     private readonly studentRepository: IStudentRepository,
-    @Inject('directionRepository')
-    private readonly directionRepository: IDirectionRepository,
+    @Inject('SpecialtyRepository')
+    private readonly SpecialtyRepository: ISpecialtyRepository,
   ) {}
 
   async createStudent(data: ICreateStudentDto): Promise<IStudentEntity> {
@@ -35,14 +35,5 @@ export class StudentService implements IStudentService {
 
   async findByName(fullName: string): Promise<IStudentEntity> {
     return await this.studentRepository.findByName(fullName);
-  }
-
-  async addStudentToDirection(studentId: string, directionId: string): Promise<void> {
-    const student = await this.studentRepository.findOne(studentId);
-    const direction = await this.directionRepository.findOne(directionId);
-
-    if (!student || !direction) {
-      throw new Error('Student or Direction not found');
-    }
   }
 }

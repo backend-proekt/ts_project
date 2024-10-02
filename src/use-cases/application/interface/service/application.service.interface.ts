@@ -6,5 +6,4 @@ export interface IApplicationService {
   findApplicationById(id: string): Promise<IApplicationEntity>;
   findByName(fullName: string): Promise<IApplicationEntity>;
   findByEmail(email: string): Promise<IApplicationEntity>;
-  addApplicationToDirection(applicationId: string, directionId: string): Promise<void>;
 }

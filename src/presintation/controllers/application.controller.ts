@@ -94,12 +94,4 @@ export class ApplicationController {
       url: application.url,
     };
   }
-
-  @Post(':applicationId/directions/:directionId')
-  async addApplicationToDirection(
-    @Param('applicationId') applicationId: string,
-    @Param('directionId') directionId: string,
-  ): Promise<void> {
-    await this.applicationService.addApplicationToDirection(applicationId, directionId);
-  }
 }

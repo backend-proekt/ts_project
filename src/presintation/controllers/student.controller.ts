@@ -93,12 +93,4 @@ export class StudentController {
       url: student.url,
     };
   }
-
-  @Post(':studentId/directions/:directionId')
-  async addStudentToDirection(
-    @Param('studentId') studentId: string,
-    @Param('directionId') directionId: string,
-  ): Promise<void> {
-    await this.studentService.addStudentToDirection(studentId, directionId);
-  }
 }

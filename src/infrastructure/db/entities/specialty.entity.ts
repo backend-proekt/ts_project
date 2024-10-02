@@ -4,7 +4,7 @@ import { ApplicationEntity } from './application.entity';
 import { IsNotEmpty } from 'class-validator';
 
 @Entity()
-export class DirectionEntity {
+export class SpecialtyEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -12,9 +12,9 @@ export class DirectionEntity {
   @IsNotEmpty()
   name: string;
 
-  @OneToMany(() => StudentEntity, (student) => student.direction)
+  @OneToMany(() => StudentEntity, (student) => student.specialty)
   students: StudentEntity[];
 
-  @OneToMany(() => ApplicationEntity, (application) => application.direction)
+  @OneToMany(() => ApplicationEntity, (application) => application.specialty)
   applications: ApplicationEntity[];
 }

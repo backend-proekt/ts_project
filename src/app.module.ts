@@ -5,7 +5,7 @@ import { TypeOrmComponent } from './infrastructure/db/conect';
 import { AuthModule } from './infrastructure/modules/auth.module';
 import { ApplicationModule } from './infrastructure/modules/application.module';
 import { StudentModule } from './infrastructure/modules/student.module';
-import { DirectionModule } from './infrastructure/modules/direction.module';
+import { SpecialtyModule } from './infrastructure/modules/specialty.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { DirectionModule } from './infrastructure/modules/direction.module';
     AuthModule,
     ApplicationModule,
     StudentModule,
-    DirectionModule,
+    SpecialtyModule,
   ],
   controllers: [],
   providers: [],
