@@ -31,6 +31,14 @@ export class ApplicationService implements IApplicationService {
     return await this.applicationRepository.findAllApplications();
   }
 
+  async deleteApplication(id: string): Promise<void> {
+    try {
+      return await this.applicationRepository.deleteApplication(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async findById(id: string): Promise<IApplicationEntity> {
     return await this.applicationRepository.findById(id);
   }

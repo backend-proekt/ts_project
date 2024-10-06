@@ -30,13 +30,21 @@ export class StudentRepository implements IStudentRepository {
     }
   }
 
-  /*async deleteStudent(id: string): Promise<IStudentEntity[]> {
+  async deleteStudent(id: string): Promise<void> {
     try {
-      return this.studentRepository.delete({ id });
+      await this.studentRepository.delete(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async update(id: string, column: string, vlaue: string): Promise<IStudentEntity> {
+    try {
+      return this.studentRepository.findOneBy({ id });
     } catch (error) {
       throw new Error('Student not found');
     }
-  }*/
+  }
 
   async findById(id: string): Promise<IStudentEntity> {
     try {

@@ -30,9 +30,17 @@ export class StudentService implements IStudentService {
     return await this.studentRepository.findAllStudents();
   }
 
-  /*async deleteStudent(id: string): Promise<IStudentEntity> {
-    return await this.studentRepository.deleteStudent(id);
-  }*/
+  async deleteStudent(id: string): Promise<void> {
+    try {
+      return await this.studentRepository.deleteStudent(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async update(id: string, column: string, value: string): Promise<IStudentEntity>{
+    return await this.studentRepository.update(id, column, value);
+  }
 
   async findById(id: string): Promise<IStudentEntity> {
     return await this.studentRepository.findById(id);

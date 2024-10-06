@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Delete, Put, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
 import { IApplicationService } from 'src/use-cases/application/interface/service/application.service.interface';
 import { 
   ApiBearerAuth,
@@ -56,6 +56,14 @@ export class ApplicationController {
     return await this.applicationService.findAllApplications();
   }
 
+  @Delete('delete/:id')
+  @ApiOperation({ summary: 'Delete a application by its ID' })
+  @ApiParam({ name: 'id', description: 'Application ID', type: 'string' })
+  @ApiResponse({ status: 200, description: 'The application has been successfully deleted.' })
+  @ApiResponse({ status: 404, description: 'Application not found.' })
+  async deleteApplication(@Param('id') id: string) {
+    await this.applicationService.deleteApplication(id);
+  }
 
   @Get('findById/:id')
   @ApiOperation({ summary: 'Get a application by its ID' })

@@ -1,4 +1,4 @@
-import { Controller, Get, Delete, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Delete, Put, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
 import { IStudentService } from 'src/use-cases/student/interface/service/student.service.interface';
 import { 
   ApiBearerAuth,
@@ -56,13 +56,25 @@ export class StudentController {
     return await this.studentService.findAllStudents();
   }
 
-  /*@Delete('delete')
-  @ApiOperation({ summary: 'Delete student' })
-  @ApiResponse({ status: 200, description: 'Student has benn deleted.' })
+  @Delete('delete/:id')
+  @ApiOperation({ summary: 'Delete a student by its ID' })
+  @ApiParam({ name: 'id', description: 'Student ID', type: 'string' })
+  @ApiResponse({ status: 200, description: 'The student has been successfully deleted.' })
   @ApiResponse({ status: 404, description: 'Student not found.' })
   async deleteStudent(@Param('id') id: string) {
-    return await this.studentService.deleteStudent(id);
-  }*/
+    await this.studentService.deleteStudent(id);
+  }
+
+  @Put('update')
+  @ApiOperation({ summary: 'Get a student by its ID' })
+  @ApiParam({ name: 'id', description: 'Student ID', type: 'string' })
+  @ApiParam({ name: 'column', description: 'The column that needs to be changed', type: 'string' })
+  @ApiParam({ name: 'value', description: 'Value of the column', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the student with the given ID.' })
+  @ApiResponse({ status: 404, description: 'Student not found.' })
+  async update(@Param('id') id: string, @Param('column') column: string, @Param('value') value: string) {
+    return await this.studentService.update(id, column, value);
+  }
 
   @Get('findById/:id')
   @ApiOperation({ summary: 'Get a student by its ID' })

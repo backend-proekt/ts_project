@@ -30,6 +30,14 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
+  async deleteApplication(id: string): Promise<void> {
+    try {
+      await this.applicationRepository.delete(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async findById(applicationId: string): Promise<IApplicationEntity> {
     try {
       return this.applicationRepository.findOne({ where: { id: applicationId } });
