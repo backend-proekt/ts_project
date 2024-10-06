@@ -22,13 +22,6 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  async findById(id: string): Promise<IUserEntity> {
-    try {
-      return this.userRepository.findOneBy({ id });
-    } catch (error) {
-      throw new Error('User not found');
-    }
-  }
 
   findByEmail(email: string): Promise<IUserEntity> {
     try {
@@ -38,13 +31,11 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  async findOne(userId: string): Promise<IUserEntity> {
+  async findById(userId: string): Promise<IUserEntity> {
     try {
       return this.userRepository.findOne({ where: { id: userId } });
     } catch (error) {
       throw new Error('User not found');
     }
   }
-
-
 }

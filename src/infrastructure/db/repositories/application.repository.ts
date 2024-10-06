@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
 import { IApplicationRepository } from 'src/use-cases/application/interface/repository/application.repository.interface';
 import { ApplicationEntity } from '../entities/application.entity';
-import { Repository } from 'typeorm';
 import { IApplicationEntity } from 'src/entiies/application/interface/application.entity.interface';
 
 @Injectable()
@@ -22,17 +22,17 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
-  async findApplicationById(id: string): Promise<IApplicationEntity> {
+  async findAllApplications(): Promise<IApplicationEntity[]> {
     try {
-      return this.applicationRepository.findOneBy({ id });
+      return this.applicationRepository.find({  });
     } catch (error) {
       throw new Error('Application not found');
     }
   }
 
-  findByEmail(email: string): Promise<IApplicationEntity> {
+  async findById(applicationId: string): Promise<IApplicationEntity> {
     try {
-      return this.applicationRepository.findOneBy({ email });
+      return this.applicationRepository.findOne({ where: { id: applicationId } });
     } catch (error) {
       throw new Error('Application not found');
     }
@@ -46,9 +46,9 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
-  async findOne(applicationId: string): Promise<IApplicationEntity> {
+  findByEmail(email: string): Promise<IApplicationEntity> {
     try {
-      return this.applicationRepository.findOne({ where: { id: applicationId } });
+      return this.applicationRepository.findOneBy({ email });
     } catch (error) {
       throw new Error('Application not found');
     }

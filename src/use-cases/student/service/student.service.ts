@@ -3,15 +3,12 @@ import { IStudentService } from '../interface/service/student.service.interface'
 import { IStudentRepository } from '../interface/repository/student.repository.interface';
 import { IStudentEntity } from 'src/entiies/student/interface/student.entity.interface';
 import { ICreateStudentDto } from '../interface/dto/create.student.dto.interface';
-import { ISpecialtyRepository } from 'src/use-cases/specialty/interface/repository/specialty.repository.interface';
 
 @Injectable()
 export class StudentService implements IStudentService {
   constructor(
     @Inject('studentRepository')
     private readonly studentRepository: IStudentRepository,
-    @Inject('SpecialtyRepository')
-    private readonly SpecialtyRepository: ISpecialtyRepository,
   ) {}
 
   async createStudent(data: ICreateStudentDto): Promise<IStudentEntity> {
@@ -29,11 +26,23 @@ export class StudentService implements IStudentService {
     });
   }
 
-  async findByEmail(email: string): Promise<IStudentEntity> {
-    return await this.studentRepository.findByEmail(email);
+  async findAllStudents(): Promise<IStudentEntity[]> {
+    return await this.studentRepository.findAllStudents();
+  }
+
+  /*async deleteStudent(id: string): Promise<IStudentEntity> {
+    return await this.studentRepository.deleteStudent(id);
+  }*/
+
+  async findById(id: string): Promise<IStudentEntity> {
+    return await this.studentRepository.findById(id);
   }
 
   async findByName(fullName: string): Promise<IStudentEntity> {
     return await this.studentRepository.findByName(fullName);
+  }
+
+  async findByEmail(email: string): Promise<IStudentEntity> {
+    return await this.studentRepository.findByEmail(email);
   }
 }

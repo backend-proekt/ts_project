@@ -1,5 +1,3 @@
-import { ISpecialtyEntity } from "src/entiies/specialty/interface/specialty.entity.interface";
-
 export interface IApplicationEntity {
   id?: string;
   status?: string;
@@ -12,5 +10,4 @@ export interface IApplicationEntity {
   phone: string;
   email: string;
   url: string;
-  specialtyId: ISpecialtyEntity[];
 }

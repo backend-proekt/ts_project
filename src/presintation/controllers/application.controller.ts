@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param, Post, Req, Res, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
 import { IApplicationService } from 'src/use-cases/application/interface/service/application.service.interface';
 import { 
   ApiBearerAuth,
@@ -48,50 +48,40 @@ export class ApplicationController {
     return await this.applicationService.createApplication(data);
   }
 
-  @Get('get/:id')
+  @Get('get')
+  @ApiOperation({ summary: 'Get all applications' })
+  @ApiResponse({ status: 200, description: 'Return all applications.' })
+  @ApiResponse({ status: 404, description: 'Applications not found.' })
+  async findAllApplications() {
+    return await this.applicationService.findAllApplications();
+  }
+
+
+  @Get('findById/:id')
   @ApiOperation({ summary: 'Get a application by its ID' })
   @ApiParam({ name: 'id', description: 'Application ID', type: 'string' })
   @ApiResponse({ status: 200, description: 'Return the application with the given ID.' })
   @ApiResponse({ status: 404, description: 'Application not found.' })
-  async findApplicationById(@Param('id') id: string) {
-    return await this.applicationService.findApplicationById(id);
+  async findById(@Param('id') id: string) {
+    return await this.applicationService.findById(id);
   }
 
-  @Get('findApplication/:email')
-  async findByEmail(@Param('email') email: string) {
-    const application = await this.applicationService.findByEmail(email);
-
-    return {
-        id: application.id,
-        status: application.status,
-        typeOfLearning: application.typeOfLearning,
-        fullName: application.fullName,
-        age: application.age,
-        city: application.city,
-        specialty: application.specialty,
-        parentsName: application.parentsName,
-        phone: application.phone,
-        email: application.email,
-        url: application.url,
-    };
-  }
-
-  @Get('findApplication/:fullName')
+  @Get('findByName/:fullName')
+  @ApiOperation({ summary: 'Get a application by its Name' })
+  @ApiParam({ name: 'fullName', description: 'Application fullName', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the application with the given fullname.' })
+  @ApiResponse({ status: 404, description: 'Application not found.' })
   async findByName(@Param('fullName') fullName: string) {
-    const application = await this.applicationService.findByName(fullName);
+      return await this.applicationService.findByName(fullName);
+  };
 
-    return {
-      id: application.id,
-      status: application.status,
-      typeOfLearning: application.typeOfLearning,
-      fullName: application.fullName,
-      age: application.age,
-      city: application.city,
-      specialty: application.specialty,
-      parentsName: application.parentsName,
-      phone: application.phone,
-      email: application.email,
-      url: application.url,
-    };
-  }
+
+  @Get('findByEmail/:email')
+  @ApiOperation({ summary: 'Get a application by its email' })
+  @ApiParam({ name: 'email', description: 'Application email', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the application with the given email.' })
+  @ApiResponse({ status: 404, description: 'Application not found.' })
+  async findByEmail(@Param('email') email: string) {
+      return await this.applicationService.findByEmail(email);
+  };
 }

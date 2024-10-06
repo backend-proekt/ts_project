@@ -3,7 +3,9 @@ import { ICreateStudentDto } from '../dto/create.student.dto.interface';
 
 export interface IStudentRepository {
   createStudent(data: ICreateStudentDto): Promise<IStudentEntity>;
-  findByName(FullName: string): Promise<IStudentEntity>;
+  findAllStudents(): Promise<IStudentEntity[]>;
+  //deleteStudent(id: string): Promise<IStudentEntity[]>;
+  findById(id: string): Promise<IStudentEntity>;
   findByEmail(email: string): Promise<IStudentEntity>;
-  findOne(studentId: string): Promise<IStudentEntity>;
+  findByName(fullName: string): Promise<IStudentEntity>;
 }

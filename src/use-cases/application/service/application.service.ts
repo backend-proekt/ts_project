@@ -3,15 +3,12 @@ import { IApplicationService } from '../interface/service/application.service.in
 import { IApplicationRepository } from '../interface/repository/application.repository.interface';
 import { IApplicationEntity } from 'src/entiies/application/interface/application.entity.interface';
 import { ICreateApplicationDto } from '../interface/dto/create.application.dto.interface';
-import { ISpecialtyRepository } from 'src/use-cases/Specialty/interface/repository/specialty.repository.interface';
 
 @Injectable()
 export class ApplicationService implements IApplicationService {
   constructor(
     @Inject('applicationRepository')
     private readonly applicationRepository: IApplicationRepository,
-    @Inject('SpecialtyRepository')
-    private readonly SpecialtyRepository: ISpecialtyRepository,
   ) {}
 
   async createApplication(data: ICreateApplicationDto): Promise<IApplicationEntity> {
@@ -30,8 +27,12 @@ export class ApplicationService implements IApplicationService {
     });
   }
 
-  async findApplicationById(id: string): Promise<IApplicationEntity> {
-    return await this.applicationRepository.findApplicationById(id);
+  async findAllApplications(): Promise<IApplicationEntity[]> {
+    return await this.applicationRepository.findAllApplications();
+  }
+
+  async findById(id: string): Promise<IApplicationEntity> {
+    return await this.applicationRepository.findById(id);
   }
 
   async findByName(fullName: string): Promise<IApplicationEntity> {

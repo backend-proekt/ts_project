@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param, Post, Req, Res, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Delete, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
 import { IStudentService } from 'src/use-cases/student/interface/service/student.service.interface';
 import { 
   ApiBearerAuth,
@@ -26,7 +26,7 @@ export class StudentController {
 
   @Post('create')
   @ApiOperation({ summary: 'Create a new student' })
-  @ApiConsumes('student/json')
+  @ApiConsumes('application/json')
   @ApiBody({
     schema: {
       properties: {
@@ -48,49 +48,47 @@ export class StudentController {
     return await this.studentService.createStudent(data);
   }
 
-  @Get(':studentId')
-  @ApiOperation({ summary: 'Get the student' })
-  @ApiResponse({ status: 200, description: 'Return the student' })
-  @ApiResponse({ status: 404, description: 'Student not found' })
-  @ApiParam({
-    name: 'studentId',
-    description: 'ID of the student to retrieve',
-    type: String,
-  })
-
-  @Get('findStudent/:email')
-  async findByEmail(@Param('email') email: string) {
-    const student = await this.studentService.findByEmail(email);
-
-    return {
-        id: student.id,
-        typeOfLearning: student.typeOfLearning,
-        fullName: student.fullName,
-        age: student.age,
-        city: student.city,
-        specialty: student.specialty,
-        parentsName: student.parentsName,
-        phone: student.phone,
-        email: student.email,
-        url: student.url,
-    };
+  @Get('get')
+  @ApiOperation({ summary: 'Get all students' })
+  @ApiResponse({ status: 200, description: 'Return all students.' })
+  @ApiResponse({ status: 404, description: 'Students not found.' })
+  async findAllStudents() {
+    return await this.studentService.findAllStudents();
   }
 
-  @Get('findStudent/:fullName')
+  /*@Delete('delete')
+  @ApiOperation({ summary: 'Delete student' })
+  @ApiResponse({ status: 200, description: 'Student has benn deleted.' })
+  @ApiResponse({ status: 404, description: 'Student not found.' })
+  async deleteStudent(@Param('id') id: string) {
+    return await this.studentService.deleteStudent(id);
+  }*/
+
+  @Get('findById/:id')
+  @ApiOperation({ summary: 'Get a student by its ID' })
+  @ApiParam({ name: 'id', description: 'Student ID', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the student with the given ID.' })
+  @ApiResponse({ status: 404, description: 'Student not found.' })
+  async findById(@Param('id') id: string) {
+    return await this.studentService.findById(id);
+  }
+
+  @Get('findByName/:fullName')
+  @ApiOperation({ summary: 'Get a student by its Name' })
+  @ApiParam({ name: 'fullName', description: 'Student fullName', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the student with the given fullname.' })
+  @ApiResponse({ status: 404, description: 'Student not found.' })
   async findByName(@Param('fullName') fullName: string) {
-    const student = await this.studentService.findByName(fullName);
+      return await this.studentService.findByName(fullName);
+  };
 
-    return {
-      id: student.id,
-      typeOfLearning: student.typeOfLearning,
-      fullName: student.fullName,
-      age: student.age,
-      city: student.city,
-      specialty: student.specialty,
-      parentsName: student.parentsName,
-      phone: student.phone,
-      email: student.email,
-      url: student.url,
-    };
-  }
+
+  @Get('findByEmail/:email')
+  @ApiOperation({ summary: 'Get a student by its email' })
+  @ApiParam({ name: 'email', description: 'Student email', type: 'string' })
+  @ApiResponse({ status: 200, description: 'Return the student with the given email.' })
+  @ApiResponse({ status: 404, description: 'Student not found.' })
+  async findByEmail(@Param('email') email: string) {
+      return await this.studentService.findByEmail(email);
+  };
 }

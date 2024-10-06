@@ -1,11 +1,9 @@
-import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import {
   Column,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SpecialtyEntity } from './specialty.entity';
 
 @Entity() 
 export class StudentEntity {
@@ -45,7 +43,4 @@ export class StudentEntity {
 
   @Column('varchar')
   url: string;
-
-  @ManyToOne(() => SpecialtyEntity, (specialtyId) => specialtyId.students)
-  specialtyId: SpecialtyEntity[];
 }

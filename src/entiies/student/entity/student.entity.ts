@@ -1,4 +1,3 @@
-import { ISpecialtyEntity } from 'src/entiies/specialty/interface/specialty.entity.interface';
 import { IStudentEntity } from '../interface/student.entity.interface';
 import { TStudentEntity } from '../type/student.entity.type';
 
@@ -13,9 +12,7 @@ export class StudentEntity implements IStudentEntity {
   phone: string;
   email: string;
   url: string;
-  specialtyId: string;
-  
-  
+
   constructor(data: TStudentEntity) {
     this.id = data.id;
     this.typeOfLearning = data.typeOfLearning;
@@ -27,6 +24,5 @@ export class StudentEntity implements IStudentEntity {
     this.phone = data.phone;
     this.email = data.email;
     this.url = data.url;
-    this.specialtyId = data.specialtyId;
   }
 }

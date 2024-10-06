@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { ICreateStudentDto } from 'src/use-cases/student/interface/dto/create.student.dto.interface';
 import { IStudentRepository } from 'src/use-cases/student/interface/repository/student.repository.interface';
 import { StudentEntity } from '../entities/student.entity';
-import { Repository } from 'typeorm';
 import { IStudentEntity } from 'src/entiies/student/interface/student.entity.interface';
 
 @Injectable()
@@ -22,9 +22,25 @@ export class StudentRepository implements IStudentRepository {
     }
   }
 
-  findByEmail(email: string): Promise<IStudentEntity> {
+  async findAllStudents(): Promise<IStudentEntity[]> {
     try {
-      return this.studentRepository.findOneBy({ email });
+      return this.studentRepository.find({  });
+    } catch (error) {
+      throw new Error('Students not found');
+    }
+  }
+
+  /*async deleteStudent(id: string): Promise<IStudentEntity[]> {
+    try {
+      return this.studentRepository.delete({ id });
+    } catch (error) {
+      throw new Error('Student not found');
+    }
+  }*/
+
+  async findById(id: string): Promise<IStudentEntity> {
+    try {
+      return this.studentRepository.findOneBy({ id });
     } catch (error) {
       throw new Error('Student not found');
     }
@@ -38,9 +54,9 @@ export class StudentRepository implements IStudentRepository {
     }
   }
 
-  async findOne(studentId: string): Promise<IStudentEntity> {
+  findByEmail(email: string): Promise<IStudentEntity> {
     try {
-      return this.studentRepository.findOne({ where: { id: studentId } });
+      return this.studentRepository.findOneBy({ email });
     } catch (error) {
       throw new Error('Student not found');
     }

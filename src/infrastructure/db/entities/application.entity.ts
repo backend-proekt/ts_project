@@ -2,10 +2,8 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 import {
   Column,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SpecialtyEntity } from './specialty.entity';
 
 @Entity() 
 export class ApplicationEntity {
@@ -13,7 +11,6 @@ export class ApplicationEntity {
   id: string;
 
   @Column('varchar')
-  @IsNotEmpty()
   status: string;
 
   @Column('varchar')
@@ -29,6 +26,7 @@ export class ApplicationEntity {
   age: string;
 
   @Column('varchar')
+  @IsNotEmpty()
   city: string;
 
   @Column('varchar')
@@ -48,7 +46,4 @@ export class ApplicationEntity {
 
   @Column('varchar')
   url: string;
-
-  @ManyToOne(() => SpecialtyEntity, (specialtyId) => specialtyId.applications)
-  specialtyId: SpecialtyEntity[];
 }

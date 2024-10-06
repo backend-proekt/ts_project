@@ -15,7 +15,7 @@ export class UserController {
     private readonly userService: IUserService,
   ) {}
 
-  @Get('getUser')
+  @Get('findById')
   async findById(@UserId() id: string) {
     const user = await this.userService.findById(id);
 
@@ -26,7 +26,7 @@ export class UserController {
     };
   }
 
-  @Get('findUser/:email')
+  @Get('findByEmail/:email')
   async findByEmail(@Param('email') email: string) {
     const user = await this.userService.findByEmail(email);
 
