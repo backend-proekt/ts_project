@@ -40,7 +40,7 @@ export class StudentRepository implements IStudentRepository {
 
   async update(id: string, column: string, vlaue: string): Promise<IStudentEntity> {
     try {
-      return this.studentRepository.findOneBy({ id });
+      return await this.studentRepository.findOneBy({ id });
     } catch (error) {
       throw new Error('Student not found');
     }

@@ -1,4 +1,4 @@
-import { Controller, Get, Delete, Put, Inject, Param, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Get, Delete, Put, Inject, Param, Post, Body } from '@nestjs/common';
 import { IApplicationService } from 'src/use-cases/application/interface/service/application.service.interface';
 import { 
   ApiBearerAuth,
@@ -9,15 +9,12 @@ import {
   ApiBody,
   ApiConsumes,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { Response } from 'express';
 import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
 
 
 @Controller('application')
 @ApiTags('Application')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
 export class ApplicationController {
   constructor(
     @Inject('applicationService')

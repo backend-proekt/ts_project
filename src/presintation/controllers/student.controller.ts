@@ -66,11 +66,11 @@ export class StudentController {
   }
 
   @Put('update')
-  @ApiOperation({ summary: 'Get a student by its ID' })
+  @ApiOperation({ summary: 'Change the student data' })
   @ApiParam({ name: 'id', description: 'Student ID', type: 'string' })
   @ApiParam({ name: 'column', description: 'The column that needs to be changed', type: 'string' })
   @ApiParam({ name: 'value', description: 'Value of the column', type: 'string' })
-  @ApiResponse({ status: 200, description: 'Return the student with the given ID.' })
+  @ApiResponse({ status: 200, description: 'student data has been changed.' })
   @ApiResponse({ status: 404, description: 'Student not found.' })
   async update(@Param('id') id: string, @Param('column') column: string, @Param('value') value: string) {
     return await this.studentService.update(id, column, value);
