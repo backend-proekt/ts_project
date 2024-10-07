@@ -22,6 +22,23 @@ export class UserRepository implements IUserRepository {
     }
   }
 
+  async findAllUsers(): Promise<IUserEntity[]> 
+  {
+    try {
+      return this.userRepository.find({  });
+    } catch (error) {
+      throw new Error('Users not found');
+    }
+  }
+
+  async deleteUser(id: string): Promise<void> 
+  {
+    try {
+      await this.userRepository.delete(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
   findByEmail(email: string): Promise<IUserEntity> {
     try {
