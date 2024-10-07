@@ -12,6 +12,7 @@ import {
 import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { Response } from 'express';
 import { ICreateStudentDto } from 'src/use-cases/student/interface/dto/create.student.dto.interface';
+import { IStudentEntity } from 'src/entiies/student/interface/student.entity.interface';
 
 
 @Controller('student')
@@ -65,15 +66,28 @@ export class StudentController {
     await this.studentService.deleteStudent(id);
   }
 
-  @Put('update')
+  @Put(':id')
   @ApiOperation({ summary: 'Change the student data' })
   @ApiParam({ name: 'id', description: 'Student ID', type: 'string' })
-  @ApiParam({ name: 'column', description: 'The column that needs to be changed', type: 'string' })
-  @ApiParam({ name: 'value', description: 'Value of the column', type: 'string' })
+  @ApiBody({
+    schema: {
+      properties: {
+        typeOfLearning: { type: 'string', default: 'test' },
+        fullName: { type: 'string', default: 'test' },
+        age: { type: 'string', default: 'test' },
+        city: { type: 'string', default: 'test' },
+        specialty: { type: 'string', default: 'test' },
+        parentsName: { type: 'string', default: 'test' },
+        phone: { type: 'string', default: 'test' },
+        email: { type: 'string', default: 'test' },
+        url: { type: 'string', default: 'test' },
+      },
+    },
+  })
   @ApiResponse({ status: 200, description: 'student data has been changed.' })
   @ApiResponse({ status: 404, description: 'Student not found.' })
-  async update(@Param('id') id: string, @Param('column') column: string, @Param('value') value: string) {
-    return await this.studentService.update(id, column, value);
+  async update(@Param('id') id: string, @Body() student: IStudentEntity) {
+    return await this.studentService.update(id, student);
   }
 
   @Get('findById/:id')

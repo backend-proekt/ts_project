@@ -38,6 +38,15 @@ export class ApplicationRepository implements IApplicationRepository {
     }
   }
 
+  async update(id: string, application: Partial<IApplicationEntity>): Promise<IApplicationEntity>  {
+    try{
+    await this.applicationRepository.update(id, application);
+    return this.applicationRepository.findOne({ where: { id } });
+    } catch {
+      throw new Error('Application not found');
+    }
+  }
+
   async findById(applicationId: string): Promise<IApplicationEntity> {
     try {
       return this.applicationRepository.findOne({ where: { id: applicationId } });

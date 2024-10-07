@@ -38,8 +38,8 @@ export class StudentService implements IStudentService {
     }
   }
 
-  async update(id: string, column: string, value: string): Promise<IStudentEntity>{
-    return await this.studentRepository.update(id, column, value);
+  async update(id: string, student: Partial<IStudentEntity>): Promise<IStudentEntity>{
+    return await this.studentRepository.update(id, student);
   }
 
   async findById(id: string): Promise<IStudentEntity> {

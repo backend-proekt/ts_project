@@ -39,6 +39,10 @@ export class ApplicationService implements IApplicationService {
     }
   }
 
+  async update(id: string, application: Partial<IApplicationEntity>): Promise<IApplicationEntity>{
+    return await this.applicationRepository.update(id, application);
+  }
+
   async findById(id: string): Promise<IApplicationEntity> {
     return await this.applicationRepository.findById(id);
   }

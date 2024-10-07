@@ -11,6 +11,7 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ICreateApplicationDto } from 'src/use-cases/application/interface/dto/create.application.dto.interface';
+import { IApplicationEntity } from 'src/entiies/application/interface/application.entity.interface';
 
 
 @Controller('application')
@@ -60,6 +61,30 @@ export class ApplicationController {
   @ApiResponse({ status: 404, description: 'Application not found.' })
   async deleteApplication(@Param('id') id: string) {
     await this.applicationService.deleteApplication(id);
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Change the application data' })
+  @ApiParam({ name: 'id', description: 'Application ID', type: 'string' })
+  @ApiBody({
+    schema: {
+      properties: {
+        typeOfLearning: { type: 'string', default: 'test' },
+        fullName: { type: 'string', default: 'test' },
+        age: { type: 'string', default: 'test' },
+        city: { type: 'string', default: 'test' },
+        specialty: { type: 'string', default: 'test' },
+        parentsName: { type: 'string', default: 'test' },
+        phone: { type: 'string', default: 'test' },
+        email: { type: 'string', default: 'test' },
+        url: { type: 'string', default: 'test' },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'application data has been changed.' })
+  @ApiResponse({ status: 404, description: 'Application not found.' })
+  async update(@Param('id') id: string, @Body() application: IApplicationEntity) {
+    return await this.applicationService.update(id, application);
   }
 
   @Get('findById/:id')
