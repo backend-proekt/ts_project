@@ -1,8 +1,9 @@
 import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
 import { IAuthService } from 'src/use-cases/auth/interface/service/auth.service.interface';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags, ApiBearerAuth} from '@nestjs/swagger';
 import { ICreateUserDto } from 'src/use-cases/user/interface/dto/create.user.dto.interface';
 import { LocalAuthGuard } from 'src/infrastructure/JWT/guards/local.guard';
+import { JwtAuthGuard } from 'src/infrastructure/JWT/guards/jwt.guard';
 import { CreateUserDto } from '../dto/user/create.user.dto';
 
 @Controller('auth')
@@ -13,6 +14,8 @@ export class AuthController {
     private readonly authService: IAuthService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Post('sign-up')
   @ApiBody({
     schema: {
