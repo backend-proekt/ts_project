@@ -30,7 +30,7 @@ export class AuthController {
     return this.authService.signUp(data);
   }
 
-  @UseGuards(LocalAuthGuard)
+
   @Post('sign-in')
   @ApiBody({
     schema: {
