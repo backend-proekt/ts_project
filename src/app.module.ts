@@ -11,6 +11,7 @@ import { StudentModule } from './infrastructure/modules/student.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env.local', '.env'],
     }),
     TypeOrmComponent,
     UserModule,
